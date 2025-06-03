@@ -66,10 +66,11 @@ export default function page() {
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem className='hidden' value="0">selecciona una duración</SelectItem>
-                                        <SelectItem value="10:00">10 minutos</SelectItem>
-                                        <SelectItem value="11:00">15 minutos</SelectItem>
-                                        <SelectItem value="12:00">30 minutos</SelectItem>
-                                        <SelectItem value="13:00">45 minutos</SelectItem>
+                                        <SelectItem value="10">10 minutos</SelectItem>
+                                        <SelectItem value="15">15 minutos</SelectItem>
+                                        <SelectItem value="30">30 minutos</SelectItem>
+                                        <SelectItem value="45">45 minutos</SelectItem>
+                                        <SelectItem value="60">1 hora</SelectItem>
                                     </SelectContent>
                                 </Select>
                                 {errors?.duration && <p className="text-destructive font-medium text-xs mt-2">{errors.duration}</p>}
