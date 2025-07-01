@@ -3,24 +3,9 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { meetTypes } from "@/lib/utils";
 
-const meetTypes = [
-    {
-        name: 'Google Meet',
-        value: 'google-meet',
-        active: true
-    },
-    {
-        name: 'Zoom',
-        value: 'zoom',
-        active: false
-    },
-    {
-        name: 'Microsoft Teams',
-        value: 'microsoft-teams',
-        active: false
-    }
-]
+
 export default function SelectTypeEvent({ defaultValue = 'google-meet', message }: { defaultValue?: string, message?: string }) {
 
     const [type, setType] = useState(defaultValue)
@@ -28,10 +13,10 @@ export default function SelectTypeEvent({ defaultValue = 'google-meet', message 
     return (
         <div className='space-y-2'>
             <Label htmlFor='type'> Tipo de evento </Label>
-            <div className='grid grid-cols-3'>
+            <div className='grid grid-cols-3 shadow rounded'>
                 {
                     meetTypes.map((item, index) => (
-                        <Button type='button' onClick={() => setType(item.value)} key={index} variant={item.value == type  ? 'defaultSecondary' : 'secondary'}>
+                        <Button type='button' onClick={() => setType(item.value)} key={index} variant={item.value == type  ? 'defaultSecondary' : 'ghost'}>
                             {item.name}
                         </Button>
                     ))

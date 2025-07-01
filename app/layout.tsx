@@ -29,7 +29,7 @@ export default function RootLayout({
         className={`${outfit.className} `}
       >
         {children}
-          <Notification />
+        <Notification />
       </body>
     </html>
   );

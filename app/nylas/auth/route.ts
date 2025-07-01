@@ -7,6 +7,7 @@ export async function GET(request: Request) {
         redirectUri: nylasConfig.callbackUri,
       });
   
+    
 
   return Response.redirect(authUrl);
 }

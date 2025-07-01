@@ -1,13 +1,19 @@
-
 import AvailabilityDay from '@/components/availability/AvailabilityDay'
 import { Button } from '@/components/ui/button'
+import { createClient } from '@/utils/supabase/server'
 import { CalendarClock, Clock } from 'lucide-react'
+import {daysTranslete} from '@/lib/utils'
 import React from 'react'
-
-export default function page() {
-
+import AvailableForm from '@/components/availability/AvailableForm'
 
 
+
+export default async function page() {
+
+  const supabase = await createClient()
+  const { data: auth } = await supabase.auth.getUser() as any
+  const { data } = await supabase.from('availibility').select('*').eq('id_profile', auth.user.id)
+  
   return (
     <div>
       <h2 className='text-2xl font-semibold'>Disponibilidad</h2>
@@ -32,13 +38,7 @@ export default function page() {
             </div>
           </div>
         </div>
-        <div className='space-y-1'>
-          <AvailabilityDay />
-          <AvailabilityDay />
-          <AvailabilityDay />
-        </div>
-        <Button size={'lg'} className='ml-auto w-max block mt-8'>Guardar horario</Button> 
-     
+        <AvailableForm data={data} />
       </div>
     </div>
   )

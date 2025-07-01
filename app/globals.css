@@ -71,11 +71,11 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: #fff;
-  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-foreground: oklch(0.551 0.027 264.364);
   --sidebar-primary: oklch(0.105 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: rgba(21, 127, 47, 0.05);
-  --sidebar-accent-foreground: rgb(21, 127, 48);
+  --sidebar-accent: rgb(21, 127, 48);
+  --sidebar-accent-foreground: #fff;
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 }
@@ -143,4 +143,16 @@
 
 .login-separator::before{
   right: 0;
+}
+
+::-webkit-scrollbar{
+  width: 0.5rem;
+}
+::-webkit-scrollbar-track{
+  background-color: var(--color-gray-100);
+  border-radius: 0.5rem;
+}
+::-webkit-scrollbar-thumb{
+  background-color: var(--color-gray-200);
+  border-radius: 0.5rem;
 }

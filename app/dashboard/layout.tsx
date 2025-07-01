@@ -1,12 +1,10 @@
 import AppSidebar from "@/components/app-sidebar"
-import LogInGoogle from "@/components/layout/LogInGoogle"
 import Profile from "@/components/Profile"
-import { Button } from "@/components/ui/button"
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar"
 import { createClient } from "@/utils/supabase/server"
-import { Calendar } from "lucide-react"
-import Link from "next/link"
+import React, { unstable_ViewTransition as ViewTransition } from 'react'
 import { redirect } from "next/navigation"
+import LogInNylas from "@/components/dashboard/LogInNylas"
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
 
@@ -16,19 +14,26 @@ export default async function Layout({ children }: { children: React.ReactNode }
     redirect('/login')
   }
 
+  const profile = await supabase.from('profiles').select('*').eq('id', data.user.id).single()
+  const grantId = profile?.data?.grant_id as string
+
   return (
     <SidebarProvider>
       <AppSidebar />
       <div className="w-full">
-        <header className="h-16 p-4 flex items-center justify-end border-b border-b-sidebar-ring/50">
+        <header className="h-16 p-4 flex items-center justify-between border-b border-b-sidebar-ring/50">
+          <SidebarTrigger className="text-gray-500" />
           <Profile name={'osmar'} />
         </header>
         <main className="p-6 w-full">
+        <ViewTransition>
           {children}
+        </ViewTransition>
         </main>
+        {
+          !grantId && <LogInNylas />
+        }
       </div>
-    {/* <LogInGoogle  /> */}
-
     </SidebarProvider>
   )
 }

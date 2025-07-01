@@ -13,13 +13,13 @@ import React, { act, useActionState } from 'react'
 
 
 const initialState = {
-    name: '',
+    title: '',
     url: '',
     description: '',
     duration: '',
     type: 'google-meet',
     errors: {
-        name: '',
+        title: '',
         url: '',
         description: '',
         duration: '',
@@ -31,7 +31,7 @@ export default function page() {
 
     const [state, formAction, pending] = useActionState(actionCreateEvent, initialState)
 
-    const { name, url, description, duration, type, errors } = state
+    const { title , url, description, duration, type, errors } = state
 
     return (
         <div className='max-w-xl mx-auto'>
@@ -44,9 +44,9 @@ export default function page() {
                     <form action={formAction}>
                         <div className='space-y-4'>
                             <div className='space-y-2'>
-                                <Label htmlFor='name'> Nombre del evento </Label>
-                                <Input type='text' id='name' name='name' placeholder='Ej. Reunion de algebra lineal' defaultValue={name?.toString()} />
-                                {errors?.name && <p className="text-destructive font-medium text-xs mt-2">{errors.name}</p>}
+                                <Label htmlFor='title'> Nombre del evento </Label>
+                                <Input type='text' id='title' name='title' placeholder='Ej. Reunion de algebra lineal' defaultValue={title?.toString()} />
+                                {errors?.title && <p className="text-destructive font-medium text-xs mt-2">{errors.title}</p>}
                             </div>
                             <div className='space-y-2'>
                                 <Label htmlFor='url'> URL </Label>

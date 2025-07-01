@@ -13,7 +13,9 @@ export async function GET(request: Request) {
       redirectUri: nylasConfig.callbackUri, // URI you registered with Nylas in the previous step
       code,
     });
-    const { grantId } = data;
+    console.log(data);
+    
+    const { grantId, email } = data;
 
     // You'll use this grantId to make API calls to Nylas perform actions on
     // behalf of this account. Store this in a database, associated with a user
@@ -22,7 +24,8 @@ export async function GET(request: Request) {
 
 
     await supabase.from('profiles').update({
-      grant_id: grantId
+      grant_id: grantId,
+      grant_email: email,
     }).eq('id', auth.user.id)
     
 

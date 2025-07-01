@@ -16,7 +16,7 @@ export default function page() {
           <span>Añadir reunión</span>
         </Button>
       </header>
-      <div className="mt-8 grid gap-4 grid-cols-2">
+      <div className="mt-8 grid gap-4 grid-cols-[repeat(auto-fill,minmax(min(460px,100%),1fr))]"> 
           <MeetCard />
           <MeetCard />
       </div>

@@ -46,7 +46,7 @@ export default async function page() {
             </div>
           </div>
         ) : (
-          <div className='grid gap-4 grid-cols-3 mt-6'>
+          <div className='grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,_1fr))] mt-6'>
             {
               data?.map((event: any) => (
                 <EventCard key={event.id} event={event} />

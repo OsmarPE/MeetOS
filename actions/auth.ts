@@ -74,6 +74,9 @@ export async function actionSignUp(state: any, formData: FormData) {
             }
         },
     })
+    console.log(error)
+    
+    
 
     return redirect('/')
 

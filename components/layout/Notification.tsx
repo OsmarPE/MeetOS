@@ -2,6 +2,6 @@
 import { Toaster } from 'sonner'
 
 export default function Notification() {
-  return <Toaster />
+  return <Toaster position='bottom-center' />
   
 }
