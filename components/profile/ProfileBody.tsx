@@ -66,8 +66,8 @@ export default function ProfileBody({profile}: {profile: any}) {
                   OS
                 { showImage && <img src={avatarURL} alt="avatar" className="absolute inset-0 object-cover" />}</div>
                 <div className='leading-0.5'>  
-                  <p className='font-medium text-base'>Osmar Perera</p>
-                  <span className='text-sm text-muted-foreground'>osmar.perera@gmail.com</span>
+                  <p className='font-medium text-base'>{profile?.name}</p>
+                  <span className='text-sm text-muted-foreground'>{profile?.email}</span>
                 </div>
               </div>
                 <div className='flex items-center gap-4'>
