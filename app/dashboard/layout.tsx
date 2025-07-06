@@ -26,9 +26,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
           <Profile name={'osmar'} />
         </header>
         <main className="p-6 w-full">
-        <ViewTransition>
           {children}
-        </ViewTransition>
         </main>
         {
           !grantId && <LogInNylas />

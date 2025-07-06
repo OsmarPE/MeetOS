@@ -18,17 +18,17 @@ export const daysTranslete = {
 export const meetTypes = [
     {
         name: 'Google Meet',
-        value: 'google-meet',
+        value: 'Google Meet',
         active: true
     },
     {
         name: 'Zoom',
-        value: 'zoom',
+        value: 'Zoom Meeting',
         active: false
     },
     {
         name: 'Microsoft Teams',
-        value: 'microsoft-teams',
+        value: 'Microsoft Teams',
         active: false
     }
 ]
@@ -98,3 +98,46 @@ export const times = [
   { name: "23:00", value: "23:00:00" },
   { name: "23:30", value: "23:30:00" }
 ];
+
+
+export const genetareRangeTime = (range = 30) => {
+  let arrayRange = [];
+  
+  let hour = 0;
+  let minute = 0;
+  let acc = 0
+  while (hour < 24) {
+    
+    const value = hour.toString().padStart(2, '0') +':' + minute.toString().padStart(2, '0')
+    
+    arrayRange.push({
+      value:`${value}:00`,
+      name: value 
+    })
+    
+    acc = acc + range
+    minute = acc % 60;
+    hour = Math.floor(acc / 60)
+    
+    if (minute >= 60){
+      minute = 0
+    }
+  
+  }
+ return arrayRange
+};
+
+export const formedDate = (value: number | string) => {
+   return new Date(value).toLocaleDateString('es-MX', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  })
+}
+
+export const formedTime = (value: number | string) => {
+  return new Date(value).toLocaleTimeString('es-MX', {
+    hour: 'numeric',
+    minute: 'numeric'
+  })
+}

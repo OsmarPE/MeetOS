@@ -55,7 +55,7 @@ export default function page() {
                             </div>
                             <div className='space-y-2'>
                                 <Label htmlFor='description'> Descripción </Label>
-                                <Textarea id='description' name='description' placeholder='Ej.Estuaremos los ultimos temas vistos en clase' defaultValue={description?.toString()} />
+                                <Textarea id='description' name='description' placeholder='Ej.Estudiaremos los ultimos temas vistos en clase' defaultValue={description?.toString()} />
                                 {errors?.description && <p className="text-destructive font-medium text-xs mt-2">{errors.description}</p>}
                             </div>
                             <div className='space-y-2'>

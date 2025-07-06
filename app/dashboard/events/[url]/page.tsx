@@ -45,7 +45,7 @@ export default async function page({ params, searchParams }: { params: Promise<{
             <EventCalendar availibilities={availibilities as Availibility[]} />
           </section>
           <section>
-            <EventTime/>
+            <EventTime range={duration}/>
           </section>
         </div>
       </article>

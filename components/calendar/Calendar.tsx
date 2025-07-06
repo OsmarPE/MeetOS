@@ -5,14 +5,16 @@ import {Button} from '@/components/ui/button';
 import CalendarGrid from './CalendarioGrid';
 import CalendarButton from './CalendarButton';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
+import { useEffect, useState } from 'react';
+import { Availibility } from '@/validations/Availibility';
 interface CalendarComponentProps extends CalendarProps<CalendarDate> {
   className?: string;
 }
 
+
 export default function Calendar(props: CalendarComponentProps) {
   let { locale } = useLocale();
-
+  const [daysWeek, setDaysWeek] = useState<Pick<Availibility,'day'|'active'>[]>([])  
   
   let state = useCalendarState({
     createCalendar,
@@ -26,7 +28,17 @@ export default function Calendar(props: CalendarComponentProps) {
     state
   );
 
-
+  useEffect(() => {
+  
+    fetch('/api/availibility')
+      .then(res => res.json())
+      .then(data => {
+        setDaysWeek(data.message)
+      })
+  
+  }, [])
+  
+  
   
   return (
     <div {...calendarProps} className="p-4 rounded-md border border-gray-200">
@@ -42,7 +54,9 @@ export default function Calendar(props: CalendarComponentProps) {
         
 
       </div>
-      <CalendarGrid state={state} firstDayOfWeek={props.firstDayOfWeek} />
+      <div className={`${!daysWeek.length ? 'pointer-events-none opacity-50' : ''}`}>
+      <CalendarGrid state={state} firstDayOfWeek={props.firstDayOfWeek} daysWeek={daysWeek} />
+      </div>
     </div>
   );
 }

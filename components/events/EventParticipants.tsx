@@ -16,17 +16,20 @@ import { Input } from '../ui/input'
 import Message from '../layout/Message'
 import { Event } from '@/validations/Events'
 import { actionSaveEvent } from '@/actions/events'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { toast } from 'sonner'
+import FormSubmit from '../auth/FormSubmit'
 
 type User = {
     name: string,
     email: string
 }
 
-type Props = Omit<Event, 'active'>
+type Props = Omit<Event, 'active'> 
 
 export default function EventParticipants({ title, description, duration, type, created_at, url }: Props) {
 
+    const [loading, setLoading] = useState(false)
     const [participants, setParticipants] = React.useState<User[]>([])
     const searchParams = useSearchParams()
     const [open, setopen] = useState(false)
@@ -34,6 +37,7 @@ export default function EventParticipants({ title, description, duration, type, 
         name: '',
         email: '',
     })
+    const router = useRouter()
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -71,6 +75,7 @@ export default function EventParticipants({ title, description, duration, type, 
 
         const exactDate = new Date(year, month - 1, day, hours, minutes);
         const timeStart = Math.floor(exactDate.getTime() / 1000);
+        const timeEnd = timeStart + (Number(duration) * 60);
         
 
         const form = new FormData()
@@ -81,12 +86,17 @@ export default function EventParticipants({ title, description, duration, type, 
         form.append('created_at', created_at)
         form.append('url', url)
         form.append('time_start', timeStart.toString())
+        form.append('time_end', timeEnd.toString())
         form.append('date', date)
         form.append('participants', JSON.stringify(participants))
         
-        return
-        await actionSaveEvent('', form)
-
+        setLoading(true)
+        const response = await actionSaveEvent('', form)
+        setLoading(false)
+        if(response.status !== 200) return toast.error(response.message)
+        
+        toast.success(response.message)
+        router.push('/dashboard/events')
     }
 
 
@@ -148,10 +158,10 @@ export default function EventParticipants({ title, description, duration, type, 
                     }
                 </div>
             </article>
-            <Button onClick={() => handleSubmitSave()} className='mt-4 ml-auto flex' size={'lg'}>
+            <FormSubmit loading={loading} onClick={() => handleSubmitSave()} className='mt-4 ml-auto flex'>
                 <Plus width={20} height={20} />
                 <span>Crear Reunion</span>
-            </Button>
+            </FormSubmit>
         </>
     )
 }

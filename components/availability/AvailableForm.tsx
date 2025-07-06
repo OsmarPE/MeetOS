@@ -12,7 +12,7 @@ interface Props {
   data:any
 }
 
-export default function AvailableForm({data}: Props) {
+export default function AvailableForm({data = []}: Props) {
   
     const [availibilities, setAvailibilities] = useState<Availibility[]>(data)
     const [loading, setLoading] = useState(false)
@@ -55,8 +55,8 @@ export default function AvailableForm({data}: Props) {
     <>
     <div className={cn('space-y-1 transition-opacity', loading ? 'opacity-50 pointer-events-none' : '')}>
            {
-             availibilities?.map((availibility) => (
-               <AvailabilityDay availibility={availibility}  handleChangeStatus={handleChangeStatus} handleTimeChange={handleTimeChange} />
+             availibilities.map((availibility, i) => (
+               <AvailabilityDay key={i} availibility={availibility}  handleChangeStatus={handleChangeStatus} handleTimeChange={handleTimeChange} />
              ))
            }
          </div>

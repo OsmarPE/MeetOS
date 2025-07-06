@@ -6,9 +6,10 @@ import { CalendarState } from 'react-stately';
 interface CalendarCellComponentProps {
   state: CalendarState;
   date: CalendarDate;
+  available?: boolean;
 }
 
-export default function CalendarCell({ state, date }: CalendarCellComponentProps) {
+export default function CalendarCell({ state, date, available = false }: CalendarCellComponentProps) {
   let ref = useRef(null);
   let {
     cellProps,
@@ -33,7 +34,7 @@ export default function CalendarCell({ state, date }: CalendarCellComponentProps
           ${isSelected ? 'bg-primary text-white hover:bg-primary' : ''} 
           ${isDisabled ? 'opacity-30 cursor-auto' : ''} 
           ${!isSelected && !isDisabled ? 'hover:bg-black/5 cursor-pointer' : ''}
-          ${isUnavailable ? 'bg-gray-50 text-gray-400' : ''}`}
+          ${(isUnavailable || available) ? 'bg-gray-50 text-gray-400 pointer-events-none' : ''}`}
       >
         {formattedDate}
         {

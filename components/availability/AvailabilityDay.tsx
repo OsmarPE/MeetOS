@@ -34,8 +34,8 @@ export default function AvailabilityDay({availibility, handleChangeStatus, handl
                 </SelectTrigger>
                 <SelectContent>
                   {
-                    times.map((time) => (
-                      <SelectItem key={time.value} value={time.value}>{time.name}</SelectItem>
+                    times.map((time,i) => (
+                      <SelectItem key={i} value={time.value}>{time.name}</SelectItem>
                     ))
                   }
                 </SelectContent>
@@ -51,8 +51,8 @@ export default function AvailabilityDay({availibility, handleChangeStatus, handl
                 </SelectTrigger>
                 <SelectContent>
                     {
-                        times.map((time) => (
-                          <SelectItem key={time.value} value={time.value}>{time.name}</SelectItem>
+                        times.map((time,i) => (
+                          <SelectItem key={i} value={time.value}>{time.name}</SelectItem>
                         ))
                     }
                 </SelectContent>

@@ -10,9 +10,25 @@ import {
 import { Button } from "../ui/button"
 import { Calendar, EllipsisVertical, Link, Pencil, Trash } from "lucide-react"
 import { useRouter } from "next/navigation"
-export default function EventCardMenu({url}:{url:string}) {
+import { toast } from "sonner"
+export default function EventCardMenu({url, id }: { url: string, id: number }) {
 
     const router = useRouter()
+
+    const handleDelete = async () => {
+        const response = await fetch(`/api/event/${id}`, {
+            method: 'DELETE',
+        })
+
+        console.log(response);
+        
+
+        if (response.ok) {
+            toast.success('Evento borrado correctamente')
+        } else {
+            toast.error('No se pudo borrar el evento')
+        }
+    }
 
   return (
      <DropdownMenu>
@@ -30,7 +46,7 @@ export default function EventCardMenu({url}:{url:string}) {
                   <Pencil width={20} height={20} />
                   Editar
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={handleDelete}>
                   <Trash width={20} height={20} />
                   Borrar
                 </DropdownMenuItem>

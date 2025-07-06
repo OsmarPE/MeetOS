@@ -31,6 +31,9 @@ export async function actionSignIn(state: any, formData: FormData) {
         email: validation.data.email,
         password: validation.data.password,
     })
+    console.log(data);
+    console.log(error);
+    
     
     if(error){
         return redirect('/auth/login')
@@ -74,9 +77,8 @@ export async function actionSignUp(state: any, formData: FormData) {
             }
         },
     })
-    console.log(error)
     
-    
+    if (error) return redirect('/?error="Error al crear la cuenta"')
 
     return redirect('/')
 

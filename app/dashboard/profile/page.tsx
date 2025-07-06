@@ -1,48 +1,58 @@
+import { actionUpdateProfile } from '@/actions/profile'
 import FormSubmit from '@/components/auth/FormSubmit'
+import ProfileAccounts from '@/components/profile/ProfileAccounts'
+import ProfileBody from '@/components/profile/ProfileBody'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { UploadCloud } from 'lucide-react'
+import { createClient } from '@/utils/supabase/server'
+import { UploadCloud, Video } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 export default async function page() {
+  
+  const supabase = await createClient()
+  const { data: auth } = await supabase.auth.getUser() as any
+  const { data: profile } = await supabase.from('profiles').select('name, email, id, avatar_url,conf_grant_id').eq('id', auth.user.id).single()
+  
+
+  const zoomURL = `https://api.us.nylas.com/v3/connect/auth?client_id=${process.env.NYLAS_CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL_ZOOM}&response_type=code&access_type=offline&provider=zoom`
+  
+  const conf_grant_id = profile?.conf_grant_id
+
   return (
     <div className='max-w-2xl p-4'>
-          <h2 className="text-xl font-medium">Informacion de tu cuenta</h2>
-          <p className='text-sm text-gray-400'>Gestiona tus datos de perfil</p>
-          <div className='mt-8'>
-            <h3 className='text-sm text-muted-foreground mb-2'>Perfil</h3>
-            <div className='flex items-center justify-between'>
-              <div className='flex items-center gap-4'>
-                <div className='size-14 rounded-full grid place-content-center bg-primary/5 text-primary'>
-                  OS
+      <div className='mb-6'>
+            <h2 className="text-xl font-medium">Informacion de tu cuenta</h2>
+            <p className='text-sm text-gray-400'>Gestiona tus datos de perfil</p>
+            <ProfileBody profile={profile} />
+      </div>
+      <div>
+        <h2 className="text-xl font-medium">Tus cuentas</h2>
+        <p className='text-sm text-gray-400'>Gestiona tus cuentas de correo</p>
+        <div>
+          <ul className='mt-6'>
+            <li className='flex items-center justify-between gap-4'>
+              <div className="flex gap-4 items-center">
+                <div className='size-16 flex items-center justify-center rounded-md border border-gray-200'>
+                    <Video className='text-primary' width={24} height={24} />
                 </div>
-                <div className='leading-0.5'>  
-                  <p className='font-medium text-base'>Osmar Perera</p>
-                  <span className='text-sm text-muted-foreground'>osmar.perera@gmail.com</span>
+                <div className=''>
+                  <p className='font-medium'>Zoom Meeting</p>
+                  <span className='text-sm text-gray-500'>{conf_grant_id ? conf_grant_id : 'Sin cuenta asociada'}</span>
                 </div>
               </div>
-              <Button size={'sm'} variant={'outline'} className='flex items-center gap-2'>
-                <UploadCloud width={4} height={4} />
-                Subir foto
-              </Button>
-            </div>
-            <div className='mt-4 space-y-6'>
-                <div className='flex items-center gap-4 justify-between'>
-                  <Label htmlFor="name">Nombre</Label>
-                  <Input type="text" id="name" name="name" placeholder="Nombre" className="w-full max-w-sm" />
-                </div>
-                <div className='flex items-center gap-4 justify-between'>
-                  <Label htmlFor="email">Correo electrónico</Label>
-                  <Input type="text" id="email" name="email" placeholder="Correo electrónico" className="w-full max-w-sm" />
-                </div>
-                <div className='flex items-center gap-4 justify-between'>
-                  <Label htmlFor="password">Contraseña</Label>
-                  <Input type="text" id="password" name="password" placeholder="Contraseña" className="w-full max-w-sm" />
-                </div>
-            </div>
-            <FormSubmit className='mt-8 ml-auto flex' loading={false}>Guardar</FormSubmit>
-          </div>
+                {!conf_grant_id && <Button variant={'outline'} size={'sm'} className='flex items-center gap-2' asChild>
+              <Link href={zoomURL}>
+                  Añadir cuenta 
+              </Link>
+                </Button>}
+            </li>
+          </ul>
+        </div>
+
+      </div>
     </div>
   )
 }

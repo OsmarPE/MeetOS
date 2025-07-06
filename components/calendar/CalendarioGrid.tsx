@@ -1,20 +1,28 @@
 import {AriaCalendarGridProps, useCalendarGrid} from 'react-aria';
 import CalendarCell from './CalendarioCell';
 import { CalendarState } from 'react-stately';
+import { CalendarDate, getLocalTimeZone } from '@internationalized/date';
+import { Availibility } from '@/validations/Availibility';
 
 interface CalendarGridComponentProps extends AriaCalendarGridProps {
   state: CalendarState;
+  daysWeek: Pick<Availibility,'day'|'active'>[]
 }
 
-export default function CalendarGrid({ state, ...props }: CalendarGridComponentProps) {
+export default function CalendarGrid({ state,daysWeek, ...props }: CalendarGridComponentProps) {
   let { gridProps, headerProps, weekDays, weeksInMonth } = useCalendarGrid(
     props,
     state
   );
 
-  
-  // state.visibleRange.start.add()
+  const isAvaiblableDay = (date: CalendarDate) => {
+    if (!daysWeek.length) return false
+    let indexDay = date.toDate( getLocalTimeZone()).getDay()
+    indexDay = indexDay === 0 ? 6 : indexDay - 1
+    return !daysWeek[indexDay].active
+  };
 
+  
   return (
     <table {...gridProps} className='w-full'>
       <thead {...headerProps}>
@@ -25,18 +33,22 @@ export default function CalendarGrid({ state, ...props }: CalendarGridComponentP
       <tbody>
         {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
           <tr key={weekIndex} className='w-full'>
-            {state.getDatesInWeek(weekIndex).map((date, i) => (
-              date
+            {state.getDatesInWeek(weekIndex).map((date, i) => {
+              
+              const isAvailable = date ? isAvaiblableDay(date) : false
+              
+              return date
                 ? (
                   <CalendarCell
-                    
+                    available={isAvailable}
                     key={i}
                     state={state}
                     date={date}
                   />
                 )
                 : <td key={i} />
-            ))}
+              }
+            )}
           </tr>
         ))}
       </tbody>

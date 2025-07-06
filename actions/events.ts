@@ -4,7 +4,10 @@ import { nylas } from '@/lib/nylas'
 import { createClient } from '@/utils/supabase/server'
 import { validateEvent } from '@/validations/Events'
 import { redirect } from 'next/navigation'
+import { Event } from '@/validations/Events'
 import { NextRequest } from 'next/server'
+import { Conferencing, Participant } from 'nylas'
+import { log } from 'util'
 
 export async function actionCreateEvent(state: any, formData: FormData) {
 
@@ -53,20 +56,58 @@ export async function actionCreateEvent(state: any, formData: FormData) {
 
 }
 
-export async function actionSaveEvent(state: any, formData: FormData) {
+export async function actionSaveEvent(state: any, formData: FormData):Promise<{message: string,status: number}> {
 
+    try {
     const data = Object.fromEntries(formData.entries())
-    console.log(data)
-
+    const participants = JSON.parse(data.participants as string) as Participant[]
+   
+ 
     const supabase = await createClient()
     const { data: auth } = await supabase.auth.getUser()
-    const d = await supabase.from('profile').select('id').eq('id', auth?.user?.id)
-
+    const {data: profile } = await supabase.from('profiles').select('id,grant_id,grant_email,conf_grant_id').eq('id', auth?.user?.id).single() 
+  
     
-    // const newEvent = await nylas.events.create({
-    //     identifier: data.title,
-    // })
-
-    return redirect('/dashboard')
+    const newEvent = await nylas.events.create({
+        identifier: profile?.grant_id ?? '',
+        queryParams:{
+            calendarId: profile?.grant_email ?? '',
+        },
+        requestBody: {
+            title: data.title.toString(),
+            description: data.description.toString(),
+            participants,
+            when: {
+                startTime: Number(data.time_start),
+                endTime: Number(data.time_end),
+                startTimezone: 'America/Mexico_City',
+                endTimezone: 'America/Mexico_City'
+            },
+            busy: false,
+            visibility: 'public',
+            conferencing: {
+                provider: data.type.toString(),
+                autocreate: {
+                    ...(data.type === 'Zoom Meeting' && { conf_grant_id: profile?.conf_grant_id, details:{ meeting_code: "auto"} })
+                },
+                
+            } as Conferencing
+        }
+    });
+    
+    console.log(newEvent);
+    
+    return {
+        message: 'Evento creado correctamente',
+        status: 200,
+    }
+    } catch (error) {
+        console.log(error);
+        
+        return {
+            message: 'No se pudo crear el evento, intenta nuevamente',
+            status: 500,
+        }
+    }
 
 }

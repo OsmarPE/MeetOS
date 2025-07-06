@@ -1,7 +1,5 @@
 
 export const GET = () => {
 
-    return Response.json({
-        message: 'Hello World'
-    })
+    return new Response(JSON.stringify({ name: 'Osmar Perera', email: 'osmar.perera@gmail.com' }))
 }

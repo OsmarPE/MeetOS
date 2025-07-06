@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -9,18 +9,28 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown, Settings, User } from "lucide-react"
 import LogOut from "./dashboard/LogOut"
+import { createClient } from "@/utils/supabase/server"
 
 interface Props{
     name: string
 }
 
-export default function Profile({name}: Props) {
+export default async function Profile({name}: Props) {
 
+    const supabase = await createClient()
+    const { data: auth } = await supabase.auth.getUser()
+    const { data: profile } = await supabase.from('profiles').select('avatar_url').eq('id', auth?.user?.id).single()
+
+    const avatarURL = profile?.avatar_url ? `${process.env.NEXT_PUBLIC_BUCKET_URL}${profile?.avatar_url}` : ''
+    
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-2 cursor-pointer">
                 <Avatar className="uppercase">
-                    <AvatarFallback>{name.slice(0, 2)}</AvatarFallback>
+                    <AvatarFallback>
+                        {name.slice(0, 2)}
+                    </AvatarFallback>
+                   {avatarURL && <AvatarImage src={avatarURL} alt="avatar" />}
                 </Avatar>
                 <ChevronDown width={16} height={16} className="text-gray-400" />
             </DropdownMenuTrigger>

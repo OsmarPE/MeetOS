@@ -51,7 +51,7 @@ export  default function AppSidebar() {
         <div className="w-full pt-3 overflow-hidden">
           <div className="text-foreground font-medium flex items-center gap-2 min-w-max">
             <div className="size-8 grid place-content-center">
-              <Image src={Logo.src} width={24} height={24} alt="MeetOS" className="rounded" />
+              <Image src={Logo.src} width={24} height={24} alt="MeetOS" className="w-6 h-auto" />
             </div>
             <span>MeetOS</span>
           </div>
