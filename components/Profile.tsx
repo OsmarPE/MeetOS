@@ -22,7 +22,8 @@ export default async function Profile({name}: Props) {
     const { data: profile } = await supabase.from('profiles').select('avatar_url').eq('id', auth?.user?.id).single()
 
     const avatarURL = profile?.avatar_url ? `${process.env.NEXT_PUBLIC_BUCKET_URL}${profile?.avatar_url}` : ''
-    
+
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-2 cursor-pointer">

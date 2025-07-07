@@ -11,20 +11,24 @@ interface Props {
     duration: string
     type: string
     url: string,
-    status: boolean
-  }
+    status: boolean,
+    event_id: string
+  },
+  grantId: string,
+  grandEmail: string
 }
 
-export default function EventCard({ event }: Props) {
+export default function EventCard({ event, grandEmail,grantId }: Props) {
 
-  const { id, title, description, duration, type, url, status } = event
+  const { id, title, description, duration, type, url, status, event_id } = event
 
+  
   return (
     <Card className=' flex flex-col justify-between shadow-none'>
       <CardContent>
           <div className='flex items-center gap-4 justify-between mb-4'>
             <Calendar className='text-primary' width={22} height={22} />
-            <EventCardMenu url={url} id={id} />
+            <EventCardMenu url={url} id={id} grandEmail={grandEmail} grantId={grantId} eventId={event_id} />
           </div>
             <div className=''>
               <span className='text-sm text-primary space-y-1 inline-block'>{type}</span>

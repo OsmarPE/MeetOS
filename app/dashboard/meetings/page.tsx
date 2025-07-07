@@ -24,6 +24,8 @@ export default async function page() {
   const grantId = profile?.grant_id ?? ''
   const grandEmail = profile?.grant_email ?? ''
 
+  
+
   return (
     <ParticipantsProvider>
       <div>
@@ -33,7 +35,7 @@ export default async function page() {
             <p className='text-sm text-gray-400'>Gestiona las reuniones ya programadas</p>
           </div>
             <Button size={'lg'} asChild>
-              <Link href={`/dashboard/meetings/create`}>
+              <Link href={`/dashboard/events/create-event`}>
                   <Plus width={20} height={20} />
                   <span>Añadir reunión</span>
               </Link>

@@ -11,8 +11,8 @@ export default async function page() {
 
     const supabase = await createClient()
     const { data: auth } = await supabase.auth.getUser() as any
+    const { data:user } = await supabase.from('profiles').select('grant_id').eq('id', auth.user.id).single()
     const { data } = await supabase.from('event').select('*').eq('profile_id', auth.user.id)
-    
 
   return (
     <div>
@@ -49,7 +49,7 @@ export default async function page() {
           <div className='grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,_1fr))] mt-6'>
             {
               data?.map((event: any) => (
-                <EventCard key={event.id} event={event} />
+                <EventCard key={event.id} event={event} grandEmail={auth.user.email} grantId={user?.grant_id} />
               ))
             }
           </div>

@@ -11,13 +11,26 @@ import { Button } from "../ui/button"
 import { Calendar, EllipsisVertical, Link, Pencil, Trash } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-export default function EventCardMenu({url, id }: { url: string, id: number }) {
+
+interface Props {
+    url: string,
+    id: number,
+    grantId: string,
+    grandEmail: string,
+    eventId: string
+}
+export default function EventCardMenu({url, id, grantId, grandEmail, eventId}: Props) {
 
     const router = useRouter()
 
     const handleDelete = async () => {
         const response = await fetch(`/api/event/${id}`, {
             method: 'DELETE',
+            body: JSON.stringify({
+                grantId,
+                grandEmail,
+                eventId
+            })
         })
 
         console.log(response);
