@@ -8,9 +8,7 @@ export default function Home() {
 
   return (
     <>
-      <AnimationContainer animation="fadeDown" delay={1}>
-        <Header />
-      </AnimationContainer>
+      <Header />
       <Main/>
       <Footer />
     </>
