@@ -14,7 +14,7 @@ export default async function page() {
   
   const supabase = await createClient()
   const { data: auth } = await supabase.auth.getUser() as any
-  const { data: profile } = await supabase.from('profiles').select('name, email, id, avatar_url,conf_grant_id').eq('id', auth.user.id).single()
+  const { data: profile } = await supabase.from('profiles').select('name, email, id, avatar,conf_grant_id').eq('id', auth.user.id).single()
   
 
   const zoomURL = `https://api.us.nylas.com/v3/connect/auth?client_id=${process.env.NYLAS_CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL_ZOOM}&response_type=code&access_type=offline&provider=zoom`

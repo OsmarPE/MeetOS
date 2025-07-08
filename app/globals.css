@@ -156,3 +156,35 @@
   background-color: var(--color-gray-200);
   border-radius: 0.5rem;
 }
+.circle{
+  width: .875rem;
+  height: .875rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(21, 127, 47, 0.25);
+  border-radius: 50%;
+}
+.circle-center{
+  position: relative;
+  width: .375rem;
+  height: .375rem;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+.circle-center::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: rgba(21, 127, 47, 0.25);
+  animation: circle .75s ease infinite;
+}
+
+@keyframes circle{
+  to{
+    scale: 5;
+    opacity: 0;
+  }
+}

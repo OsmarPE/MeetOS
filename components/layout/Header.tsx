@@ -2,7 +2,7 @@ import Link from "next/link";
 import Container from "./Container";
 import { Button } from "../ui/button";
 import { Calendar } from "lucide-react";
-import  Logo  from "@/assets/img/logo.png";
+import  Logo  from "@/assets/img/logo.webp";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/server";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -14,8 +14,8 @@ export default async function Header() {
     const { data } = await supabase.auth.getUser()
     if (data?.user) {
         auth = true
-        const { data: profile } = await supabase.from('profiles').select('id,avatar_url').eq('id', data?.user?.id).single()
-        avatar_url = profile?.avatar_url ? `${process.env.NEXT_PUBLIC_BUCKET_URL}${profile?.avatar_url}` : ''
+        const { data: profile } = await supabase.from('profiles').select('id,avatar').eq('id', data?.user?.id).single()
+        avatar_url = profile?.avatar ? `${process.env.NEXT_PUBLIC_BUCKET_URL}${profile?.avatar}` : ''
     
     }
     

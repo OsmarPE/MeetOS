@@ -19,9 +19,9 @@ export default async function Profile({name}: Props) {
 
     const supabase = await createClient()
     const { data: auth } = await supabase.auth.getUser()
-    const { data: profile } = await supabase.from('profiles').select('avatar_url').eq('id', auth?.user?.id).single()
+    const { data: profile } = await supabase.from('profiles').select('avatar').eq('id', auth?.user?.id).single()
 
-    const avatarURL = profile?.avatar_url ? `${process.env.NEXT_PUBLIC_BUCKET_URL}${profile?.avatar_url}` : ''
+    const avatarURL = profile?.avatar ? `${process.env.NEXT_PUBLIC_BUCKET_URL}${profile?.avatar}` : ''
 
 
     return (

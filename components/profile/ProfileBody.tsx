@@ -53,8 +53,8 @@ export default function ProfileBody({profile}: {profile: any}) {
 
     const { name, url } = image
 
-    const avatarURL = profile?.avatar_url ? `${process.env.NEXT_PUBLIC_BUCKET_URL}${profile?.avatar_url}` : url
-    const showImage = url || profile?.avatar_url
+    const avatarURL = profile?.avatar ? `${process.env.NEXT_PUBLIC_BUCKET_URL}${profile?.avatar}` : url
+    const showImage = url || profile?.avatar
 
     return (
         <>

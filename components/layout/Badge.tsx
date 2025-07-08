@@ -9,7 +9,7 @@ interface Props {
 }
 
 const variants = {
-  default: 'bg-[#EBF2EE] text-primary',
+  default: 'bg-[#f0fdf2] text-primary',
   outline: 'bg-white text-foreground border border-gray-300'
 }
 

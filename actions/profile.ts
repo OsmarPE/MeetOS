@@ -23,7 +23,7 @@ export async function actionUpdateProfile(state: any, formData: FormData) {
              
     }
 
-    const updatedProfile = fileName ? { name, avatar_url: fileName } : { name }
+    const updatedProfile = fileName ? { name, avatar: fileName } : { name }
     await supabase.from('profiles').update(updatedProfile).eq('id', auth?.user?.id)
 
     return redirect('/dashboard/events')
