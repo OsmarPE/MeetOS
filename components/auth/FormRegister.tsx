@@ -4,7 +4,7 @@ import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import Link from 'next/link'
-import { actionSignIn } from '@/actions/auth'
+import { actionSignIn, actionSignUp } from '@/actions/auth'
 import Google from '@/assets/img/Google'
 import FormSubmit from './FormSubmit'
 import {
@@ -15,29 +15,33 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 import { FormItemInput } from '../form/FormItem'
-import { validateSignIn } from '@/validations/Auth'
+import { validateSignUp } from '@/validations/Auth'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 
 
-export default function FormLogin() {
+export default function FormRegister() {
     
     const router = useRouter()
     
-    const form = useForm<z.infer<typeof validateSignIn>>({
-    resolver: zodResolver(validateSignIn),
+    const form = useForm<z.infer<typeof validateSignUp>>({
+    resolver: zodResolver(validateSignUp),
     defaultValues: {
+      name: '',
       email: '',
       password: '',
+      confirmPassword: '',
     }    
     })
 
-    async function onSubmit(values: z.infer<typeof validateSignIn>) {
+    async function onSubmit(values: z.infer<typeof validateSignUp>) {
         const formData = new FormData()
+        formData.append('name', values.name)
         formData.append('email', values.email)
         formData.append('password', values.password)
+        formData.append('confirmPassword', values.confirmPassword)
 
-        const response = await actionSignIn(null, formData)
+        const response = await actionSignUp(null, formData)
         
         if(!response.success){
             toast.error(response.message)
@@ -60,6 +64,13 @@ export default function FormLogin() {
                 <div className='space-y-4'>
                     <FormItemInput
                         control={form.control}
+                        name="name"
+                        label="Nombre de usuario"
+                        type="text"
+                        placeholder="Andrea Santos"
+                    />
+                    <FormItemInput
+                        control={form.control}
                         name="email"
                         label="Correo electrónico"
                         type="email"
@@ -73,10 +84,17 @@ export default function FormLogin() {
                         type="password"
                         placeholder="Contraseña"    
                     />
+                    <FormItemInput
+                        control={form.control}
+                        name="confirmPassword"
+                        label="Confirmar contraseña"
+                        type="password"
+                        placeholder="Repetir contraseña"
+                    />
                    </div>
             </div>
-            <FormSubmit className='w-full mt-8' loading={form.formState.isSubmitting}>Iniciar sesión</FormSubmit>
-            <p className="text-sm text-black/60 mt-4 text-center">¿No tienes cuenta? <Link href="/auth/register" className="text-primary hover:underline">Crea una cuenta</Link></p>
+            <FormSubmit className='w-full mt-8' loading={form.formState.isLoading}>Crear cuenta</FormSubmit>
+            <p className="text-sm text-black/60 mt-4 text-center">¿Ya tienes una cuenta? <Link href="/auth/login" className="text-primary hover:underline">Inicia sesión</Link></p>
         </form>
         </Form>
     )

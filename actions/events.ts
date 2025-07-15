@@ -9,28 +9,27 @@ import { NextRequest } from 'next/server'
 import { Conferencing, Participant } from 'nylas'
 import { log } from 'util'
 
-export async function actionCreateEvent(state: any, formData: FormData) {
+interface ActionState {
+    message?: string
+    success?: boolean
+}
 
+export async function actionCreateEvent(state: ActionState | null, formData: FormData): Promise<ActionState> {
+
+    let response: ActionState = {
+        success: false,
+        message: ''
+    }
 
     const data = Object.fromEntries(formData.entries())
 
     const validation = await validateEvent.safeParse(data)
-    console.log(validation.error);
 
 
     if (!validation.success) {
-        let messages: any = {}
-        validation.error.issues.forEach((issue) => {
-            messages[issue.path[0]] = issue.message
-        })
-
         return {
-            title: data.title,
-            url: data.url,
-            description: data.description,
-            duration: data.duration,
-            type: data.type,
-            errors: messages,
+            ...response,
+            message: 'Los datos ingresados son invalidos',
         }
 
     }
@@ -49,10 +48,14 @@ export async function actionCreateEvent(state: any, formData: FormData) {
         active: true
     })
 
-    console.log(error);
+    if (error) {
+        return {
+            ...response,
+            message: 'Error al crear el evento',
+        }
+    }
 
-
-    return redirect('/dashboard')
+    return { success: true, message: 'Evento creado correctamente, ya puedes agendar tu evento al darle clic a los 3 puntitos' }
 
 }
 

@@ -40,7 +40,7 @@ export default function MeetCard({ event, grantId, grandEmail }: Props) {
           <div className="space-y-1">
             <h3 className="font-medium">{title}</h3>
             <p className="text-sm text-gray-400">{description?.split('<br />⁠')[0]}</p>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-0">
               <div className="flex items-center gap-2 text-sm text-gray-400">
                 <Calendar width={16} height={16} />
                 <span className="">{date}</span>

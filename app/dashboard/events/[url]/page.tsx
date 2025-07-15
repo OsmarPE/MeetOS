@@ -5,7 +5,6 @@ import EventTime from '@/components/events/EventTime';
 import Badge from '@/components/layout/Badge';
 import Message from '@/components/layout/Message';
 import { Button } from '@/components/ui/button';
-import { meetTypes } from '@/lib/utils';
 import { createClient } from '@/utils/supabase/server';
 import { Availibility } from '@/validations/Availibility';
 import { AlertCircle, Calendar, Clock3, Plus, User, Users, Video } from 'lucide-react';

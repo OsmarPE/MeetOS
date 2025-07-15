@@ -19,7 +19,7 @@ export default function Main() {
             <section className="min-h-[calc(100vh-80px)] flex flex-col justify-center text-center relative">
                 <Container>
                     <AnimationContainer animation="fadeDown" delay={.5} >
-                        <Badge className="mx-auto mb-4 gap-2 text-xs md:text-sm">
+                        <Badge variant="outline" className="mx-auto mb-4 gap-2 text-xs md:text-sm">
                             <div className="circle">
                                 <div className="circle-center"></div>
                             </div>
@@ -27,8 +27,8 @@ export default function Main() {
                         </Badge>
                     </AnimationContainer>
                     <AnimationContainer animation="fadeDown" delay={.75} >
-                        <h1 className="mt-4 mb-4 font-medium text-3xl md:text-4xl lg:text-5xl xl:text-6xl  mx-auto max-w-[1200px] leading-[1.1]">Gestiona tus <span className="text-primary font-instrument-serif italic lg:text-[3.25rem] xl:text-[3.875rem]">reuniones</span> pendientes,
-                            Unete con un clic, todo en una <span className="text-primary font-instrument-serif italic lg:text-[3.25rem] xl:text-[3.875rem]">app intuitiva.</span></h1>
+                        <h1 className="mt-4 mb-4 font-medium text-3xl md:text-4xl lg:text-5xl xl:text-6xl  mx-auto max-w-[1000px] leading-[1.1]">Organiza todas tus reuniones
+                            en un <span className="text-primary font-instrument-serif italic lg:text-[3.25rem] xl:text-[3.875rem]">solo lugar.</span></h1> 
                     </AnimationContainer>
                     <AnimationContainer animation="fadeDown" delay={1}>
                         <p className="md:text-lg lg:text-xl text-black/60 max-w-[900px] mx-auto">Conecta Meet, Zoom, Teams y más en una sola app. Ve tus reuniones pendientes y únete con un clic. Simple, rápido y sin complicaciones. ¡Organiza tu tiempo como nunca!</p>
@@ -41,20 +41,27 @@ export default function Main() {
                             </Button>
                     </AnimationContainer>
                 </Container>
-                <Circle className="top-20 left-0 " />
-                <Circle className="bottom-0 right-0 " />
             </section>
-            <section>
+            <section className="relative pb-4">
+                <div
+                    className="inset-0 -top-20 absolute"
+                    style={{
+                        background: "linear-gradient(to bottom, #fff 0%, #fff 16.09%, #98c7a4 46.86%, #145325 78.62%, #052e11 100%)"
+                    }}
+                >
+
+                </div>
                 <AnimationContainer animation="fadeUp" delay={1.5}>
                 <Container>
-                    <div className="max-w-5xl isolate z-10 mx-auto mb-28 p-4 rounded-xl bg-white border border-gray-200 " style={{ boxShadow: '0px -26px 78px 0 rgba(21,127,48,0.07)' }}>
+                    <div className="max-w-5xl relative isolate z-10 mx-auto mb-28 p-4 rounded-xl bg-white border border-gray-200 " style={{ boxShadow: '0px -26px 78px 0 rgba(21,127,48,0.07)' }}>
                         <Image src={Hero.src} alt="hero" className="w-full block" width={1200} height={630} />
+                        
                     </div>
                 </Container>
                 </AnimationContainer>
             </section>
             <AnimationContainer animation="fadeRight" delay={1.5}>
-            <section>
+            <section className="mt-32">
                 <Container>
                     <p className="max-w-[900px] mx-auto text-xl md:text-3xl lg:text-4xl font-medium text-center font-instrument-serif italic"><span className="text-primary">"¡Transforma el caos de las reuniones</span> en pura magia! Con una app vibrante y poderosa, une todas tus videollamadas, organiza cada detalle y conecta”</p>
                 </Container>

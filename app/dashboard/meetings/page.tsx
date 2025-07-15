@@ -22,9 +22,7 @@ export default async function page() {
   })
 
   const grantId = profile?.grant_id ?? ''
-  const grandEmail = profile?.grant_email ?? ''
-
-  
+  const grandEmail = profile?.grant_email ?? ''  
 
   return (
     <ParticipantsProvider>

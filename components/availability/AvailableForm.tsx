@@ -14,7 +14,7 @@ interface Props {
 
 export default function AvailableForm({data = []}: Props) {
   
-    const [availibilities, setAvailibilities] = useState<Availibility[]>(data)
+    const [availibilities, setAvailibilities] = useState<Availibility[]>(() => data.sort((a:any, b:any) => a.id - b.id))
     const [loading, setLoading] = useState(false)
 
     const handleChangeStatus = (value: boolean, id: number) => {  

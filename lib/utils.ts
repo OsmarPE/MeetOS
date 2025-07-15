@@ -17,17 +17,17 @@ export const daysTranslete = {
 
 export const meetTypes = [
     {
-        name: 'Google Meet',
+        label: 'Google Meet',
         value: 'Google Meet',
         active: true
     },
     {
-        name: 'Zoom',
+        label: 'Zoom',
         value: 'Zoom Meeting',
         active: false
     },
     {
-        name: 'Microsoft Teams',
+        label: 'Microsoft Teams',
         value: 'Microsoft Teams',
         active: false
     }

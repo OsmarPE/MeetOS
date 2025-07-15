@@ -9,7 +9,7 @@ type EventDetailsProps = Omit<Event, 'active'> & {date: Date}
 export default function EventDetails({  title, description, duration, type, created_at, date }: EventDetailsProps) {
 
 
-    const typeValue = meetTypes.find(item => item.value === type)?.name ?? 'Sin tipo'
+    const typeValue = meetTypes.find(item => item.value === type)?.label ?? 'Sin tipo'
 
     const dateCreatedAt = formatDateLongMX(new Date(created_at))
 

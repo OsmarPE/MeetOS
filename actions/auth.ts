@@ -4,65 +4,58 @@ import { createClient } from '@/utils/supabase/server'
 import { validateSignIn, validateSignUp } from '@/validations/Auth'
 import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
-export async function actionSignIn(state: any, formData: FormData) {
+interface ActionState {
+    message?: string
+    success?: boolean
+}
+export async function actionSignIn(state: ActionState | null, formData: FormData): Promise<ActionState> {
     
+    let response: ActionState = {
+        success: false,
+        message: ''
+    }
+
 
     const dataNew = Object.fromEntries(formData.entries())
 
     const validation = validateSignIn.safeParse(dataNew)
 
     if (validation.error) { 
-        let messages: any = {}
-        validation.error.issues.forEach((issue) => {
-            messages[issue.path[0]] = issue.message
-        })
-        
         return {
-            email: dataNew.email,
-            password: dataNew.password,
-            errors: messages,
+            ...response,
+            message: 'Correo electronico o contraseña son invalidos',
         }
     }
-
-
-    const supabase = await createClient()
+    
+    const supabase = await createClient()    
 
     const { data, error } = await supabase.auth.signInWithPassword({
         email: validation.data.email,
         password: validation.data.password,
     })
-    console.log(data);
-    console.log(error);
     
     
-    if(error){
-        return redirect('/auth/login')
-    }
+    if(error) return {...response, message: 'Correo electronico o contraseña incorrectos' }
+
+    redirect('/dashboard/events')
     
-   
-    return redirect('/dashboard/events')
+    return {...response, success: true}
 
 }
 
-export async function actionSignUp(state: any, formData: FormData) {
+export async function actionSignUp(state: ActionState | null, formData: FormData): Promise<ActionState> {
+
+    let response: ActionState = {
+        success: false,
+        message: ''
+    }
 
     const dataNew = Object.fromEntries(formData.entries())
 
     const validation = validateSignUp.safeParse(dataNew)
 
     if (validation.error) {
-        let messages: any = {}
-        validation.error.issues.forEach((issue) => {
-            messages[issue.path[0]] = issue.message
-        })
-
-        return {
-            name: dataNew.name,
-            email: dataNew.email,
-            password: dataNew.password,
-            confirmPassword: dataNew.confirmPassword,
-            errors: messages,
-        }
+       return { ...response, message: 'Los datos ingresados son invalidos' }
     }
 
     const supabase = await createClient()
@@ -77,9 +70,9 @@ export async function actionSignUp(state: any, formData: FormData) {
             }
         },
     })
-    
-    if (error) return redirect('/?error="Error al crear la cuenta"')
 
-    return redirect('/')
+    if (error) return {...response, message: 'Error al crear la cuenta' }
+    
+    return {...response, success: true}
 
 }
