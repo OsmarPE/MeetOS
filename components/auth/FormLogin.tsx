@@ -73,7 +73,8 @@ export default function FormLogin() {
                         type="password"
                         placeholder="Contraseña"    
                     />
-                   </div>
+                </div>
+                <Link href="/auth/forget-password" className="text-sm text-gray-500 block w-max ml-auto mt-4 text-center hover:underline">¿Olvidaste tu contraseña?</Link>
             </div>
             <FormSubmit className='w-full mt-8' loading={form.formState.isSubmitting}>Iniciar sesión</FormSubmit>
             <p className="text-sm text-black/60 mt-4 text-center">¿No tienes cuenta? <Link href="/auth/register" className="text-primary hover:underline">Crea una cuenta</Link></p>

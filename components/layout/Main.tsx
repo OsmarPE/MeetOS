@@ -12,8 +12,14 @@ import Circle from "./Circle";
 import AnimationContainer from "./AnimacionContainer";
 import Link from "next/link";
 import Hero from "@/assets/img/hero.webp";
+import { createClient } from "@/utils/supabase/server";
 
-export default function Main() {
+export default async function Main() {
+
+    const supabase = await createClient()
+    const { data } = await supabase.auth.getUser()
+
+    
     return (
         <main className=" ">
             <section className="min-h-[calc(100vh-80px)] flex flex-col justify-center text-center relative">
@@ -35,22 +41,19 @@ export default function Main() {
                     </AnimationContainer>
                     <AnimationContainer animation="fadeDown" delay={1.25}>
                             <Button size={'lg'} className="mt-8 shadow-[0_30px_30px_-12px__rgba(21,127,48,0.6)]" asChild>
-                                <Link href="/auth/login">
+                                { !data?.user ? <Link href="/auth/login"> 
                                     Empezar ahora
+                                </Link> : <Link href="/dashboard/events">
+                                    Ir a dashboard
                                 </Link>
+                                
+                            }
                             </Button>
                     </AnimationContainer>
                 </Container>
             </section>
             <section className="relative pb-4">
-                <div
-                    className="inset-0 -top-20 absolute"
-                    style={{
-                        background: "linear-gradient(to bottom, #fff 0%, #fff 16.09%, #98c7a4 46.86%, #145325 78.62%, #052e11 100%)"
-                    }}
-                >
-
-                </div>
+            
                 <AnimationContainer animation="fadeUp" delay={1.5}>
                 <Container>
                     <div className="max-w-5xl relative isolate z-10 mx-auto mb-28 p-4 rounded-xl bg-white border border-gray-200 " style={{ boxShadow: '0px -26px 78px 0 rgba(21,127,48,0.07)' }}>

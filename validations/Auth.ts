@@ -16,3 +16,15 @@ export const validateSignUp = z.object({
     message: 'Las contraseñas deben ser iguales',
     path: ['confirmPassword'],
 })
+
+export const validateForgetPassword = z.object({
+    email: z.string().email({message: 'Ingrese un correo electrónico válido'}),
+})
+
+export const validateResetPassword = z.object({
+    password: z.string().min(8,{message: 'Ingrese una contraseña de al menos 8 caracteres'}).max(30,{message: 'Ingrese una contraseña no tan larga'}),
+    confirmPassword: z.string(),
+}).refine((data) => data.password === data.confirmPassword, {
+    message: 'Las contraseñas deben ser iguales',
+    path: ['confirmPassword'],
+})

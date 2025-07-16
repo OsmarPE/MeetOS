@@ -92,6 +92,7 @@ export default function FormRegister() {
                         placeholder="Repetir contraseña"
                     />
                    </div>
+                    
             </div>
             <FormSubmit className='w-full mt-8' loading={form.formState.isLoading}>Crear cuenta</FormSubmit>
             <p className="text-sm text-black/60 mt-4 text-center">¿Ya tienes una cuenta? <Link href="/auth/login" className="text-primary hover:underline">Inicia sesión</Link></p>
