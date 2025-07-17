@@ -6,7 +6,7 @@ import Logo from "@/assets/img/logo.webp";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/server";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import AnimationContainer from "./AnimacionContainer";
+import AnimationContainer from "../landing/AnimacionContainer";
 export default async function Header() {
 
     let avatar_url = null
