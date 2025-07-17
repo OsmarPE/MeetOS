@@ -3,24 +3,13 @@ import { Switch } from '@/components/ui/switch'
 import { Calendar } from 'lucide-react'
 import EventCardMenu from './EventCardMenu'
 import Badge from '../layout/Badge'
-interface Props {
-  event: {
-    id: number
-    title: string
-    description: string
-    duration: string
-    type: string
-    url: string,
-    status: boolean,
-    event_id: string
-  },
-  grantId: string,
-  grandEmail: string
+import { Event } from '@/validations/Events'
+interface Props extends Event {
+  grantId: string;
+  grandEmail: string;
 }
 
-export default function EventCard({ event, grandEmail,grantId }: Props) {
-
-  const { id, title, description, duration, type, url, status, event_id } = event
+export default function EventCard({ id, title, description, duration, type, url, active, event_id, grantId, grandEmail }: Props) {
 
   
   return (
@@ -40,7 +29,7 @@ export default function EventCard({ event, grandEmail,grantId }: Props) {
       <CardFooter>
         <div className='flex justify-between items-center w-full'>
                 <Badge variant='outline' className='text-xs mt-4'>{duration} Minutos</Badge>
-          <Switch className='ml-auto mt-4' defaultChecked={status} />
+          <Switch className='ml-auto mt-4' defaultChecked={active} />
 
         </div>
       </CardFooter>

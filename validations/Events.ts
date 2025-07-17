@@ -9,8 +9,10 @@ export const validateEvent = z.object({
 })
 
 export const eventExtended = validateEvent.extend({
+    id: z.number(),
     active: z.boolean(),
     created_at: z.string(),
+    event_id: z.string(),
 });
 
 
