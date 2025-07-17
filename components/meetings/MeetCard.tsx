@@ -6,8 +6,7 @@ import Link from "next/link";
 import { Event } from "nylas";
 import MeetCardShowParticipanButton from "./MeetCardShowParticipanButton";
 
-type Props ={
-  event: Event & {
+type EventWithDetails = Pick<Event, 'title' | 'description' | 'when' | 'conferencing' | 'participants' | 'id'> & {
     when:{
       startTime: number,
       endTime: number
@@ -17,16 +16,15 @@ type Props ={
         url: string
       }
     }
-  },
+  }
+type Props = EventWithDetails & {
   grantId: string,
   grandEmail: string
 }
 
-export default function MeetCard({ event, grantId, grandEmail }: Props) {
+export default function MeetCard({ grantId, grandEmail, title, description, when, conferencing, participants, id }: Props) {
 
-  const { title, description, when, conferencing, participants, id} = event
 
-  
   const date = formedDate(when.startTime * 1000)
   const time = formedTime(when.startTime * 1000) + ' - ' + formedTime(when.endTime * 1000)
 

@@ -27,3 +27,4 @@ export const EventCreatedSchedule = validateEvent.extend({
 })
 
 export type Event = z.infer<typeof eventExtended>
+
