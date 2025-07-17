@@ -4,6 +4,7 @@ import { Calendar } from 'lucide-react'
 import EventCardMenu from './EventCardMenu'
 import Badge from '../layout/Badge'
 import { Event } from '@/validations/Events'
+import EventSwitch from './EventSwitch'
 interface Props extends Event {
   grantId: string;
   grandEmail: string;
@@ -29,7 +30,7 @@ export default function EventCard({ id, title, description, duration, type, url,
       <CardFooter>
         <div className='flex justify-between items-center w-full'>
                 <Badge variant='outline' className='text-xs mt-4'>{duration} Minutos</Badge>
-          <Switch className='ml-auto mt-4' defaultChecked={active} />
+                <EventSwitch active={active} />
 
         </div>
       </CardFooter>
