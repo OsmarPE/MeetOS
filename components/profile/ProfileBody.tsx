@@ -83,15 +83,15 @@ export default function ProfileBody({profile}: {profile: any}) {
             <div className='mt-4 space-y-6'>
                 <div className='flex items-center gap-4 justify-between'>
                   <Label htmlFor="name">Nombre</Label>
-                  <Input type="text" id="name" name="name" placeholder="Nombre" className="w-full max-w-[200px] text-sm md:text-base md:max-w-sm" defaultValue={state?.name} />
+                  <Input type="text" id="name" name="name" placeholder="Nombre" className="w-full max-w-[200px]   md:max-w-sm" defaultValue={state?.name} />
                 </div>
                 <div className='flex items-center gap-4 justify-between'>
                   <Label htmlFor="email">Correo electrónico</Label>
-                  <Input type="text" id="email" name="email" placeholder="Correo electrónico" className="w-full max-w-[200px] text-sm md:text-base md:max-w-sm" defaultValue={state?.email} disabled />
+                  <Input type="text" id="email" name="email" placeholder="Correo electrónico" className="w-full max-w-[200px]   md:max-w-sm" defaultValue={state?.email} disabled />
                 </div>
                 <div className='flex items-center gap-4 justify-between'>
                   <Label htmlFor="password">Contraseña</Label>
-                  <Input type="text" id="password" name="password" placeholder="Contraseña" className="w-full max-w-[200px] text-sm md:text-base md:max-w-sm" defaultValue={state?.password} />
+                  <Input type="text" id="password" name="password" placeholder="Contraseña" className="w-full max-w-[200px]   md:max-w-sm" defaultValue={state?.password} />
                 </div>
             </div>
             <FormSubmit className='mt-8 ml-auto flex w-full md:w-auto' loading={pending}>Guardar</FormSubmit>

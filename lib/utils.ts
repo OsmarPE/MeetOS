@@ -15,20 +15,26 @@ export const daysTranslete = {
     'Sunday': 'Domingo',
 }
 
+enum MeetType {
+    GoogleMeet = 'Google Meet',
+    ZoomMeeting = 'Zoom Meeting',
+    MicrosoftTeams = 'Microsoft Teams'
+}
+
 export const meetTypes = [
     {
         label: 'Google Meet',
-        value: 'Google Meet',
+        value: MeetType.GoogleMeet,
         active: true
     },
     {
         label: 'Zoom',
-        value: 'Zoom Meeting',
+        value: MeetType.ZoomMeeting,
         active: false
     },
     {
         label: 'Microsoft Teams',
-        value: 'Microsoft Teams',
+        value: MeetType.MicrosoftTeams,
         active: false
     }
 ]
