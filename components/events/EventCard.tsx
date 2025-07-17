@@ -18,7 +18,7 @@ export default function EventCard({ id, title, description, duration, type, url,
       <CardContent>
           <div className='flex items-center gap-4 justify-between mb-4'>
             <Calendar className='text-primary' width={22} height={22} />
-            <EventCardMenu url={url} id={id} grandEmail={grandEmail} grantId={grantId} eventId={event_id} />
+            {active && <EventCardMenu url={url} id={id} grandEmail={grandEmail} grantId={grantId} eventId={event_id} />}
           </div>
             <div className=''>
               <span className='text-sm text-primary space-y-1 inline-block'>{type}</span>
