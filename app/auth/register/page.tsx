@@ -1,6 +1,6 @@
 'use client'
 import { actionSignIn, actionSignUp } from "@/actions/auth";
-import FormRegister from "@/components/auth/FormRegister";
+import FormRegister from "@/components/auth/register/FormRegister";
 import FormSubmit from "@/components/auth/FormSubmit";
 import Container from "@/components/layout/Container";
 import { Input } from "@/components/ui/input";
@@ -26,13 +26,6 @@ export default function page() {
 
  
   return (
-    <Container className="max-w-xs">
-      <div className="size-11 bg-primary rounded-full mx-auto text-white flex items-center justify-center">
-         <Calendar className="size-4"/>
-      </div>
-         <h1 className="text-center text-2xl font-medium mt-6">Crear cuenta</h1>
-         <p className="text-center text-black/60 ">Llena el formulario para crear tu cuenta</p>
-         <FormRegister />
-    </Container>
+      <FormRegister />
   )
 }

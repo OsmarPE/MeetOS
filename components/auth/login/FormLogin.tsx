@@ -1,12 +1,12 @@
 'use client'
 import { useActionState } from 'react'
-import { Label } from '../ui/label'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { actionSignIn } from '@/actions/auth'
 import Google from '@/assets/img/Google'
-import FormSubmit from './FormSubmit'
+import FormSubmit from '@/components/auth/FormSubmit'
 import {
   Form
 } from "@/components/ui/form"
@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
-import { FormItemInput } from '../form/FormItem'
+import { FormItemInput } from '@/components/form/FormItem'
 import { validateSignIn } from '@/validations/Auth'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'

@@ -65,7 +65,7 @@ export async function actionSignUp(state: ActionState | null, formData: FormData
         email: validation.data.email,
         password: validation.data.password,
         options: {
-            emailRedirectTo: 'http://localhost:3000',
+            emailRedirectTo: getUrl() + '/auth/confirm-user' ,
             data:{
                 name: validation.data.name,
             }

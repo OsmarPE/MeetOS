@@ -1,5 +1,5 @@
 import AppSidebar from "@/components/app-sidebar"
-import Profile from "@/components/Profile"
+import Profile from "@/components/profile/Profile"
 import { SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar"
 import { createClient } from "@/utils/supabase/server"
 import React, { unstable_ViewTransition as ViewTransition } from 'react'

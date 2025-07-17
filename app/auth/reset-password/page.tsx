@@ -1,4 +1,4 @@
-import ResetPassword from "@/components/auth/ResetPassword";
+import ResetPassword from "@/components/auth/forget-password/ResetPassword";
 export default async function page({ params, searchParams }: { params: { id: string }; searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
 
     const search = await searchParams

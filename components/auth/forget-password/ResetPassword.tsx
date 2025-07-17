@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { actionForgetPassword, actionSignIn } from '@/actions/auth'
-import FormSubmit from './FormSubmit'
+import FormSubmit from '../FormSubmit'
 import {
     Form
 } from "@/components/ui/form"
@@ -9,15 +9,16 @@ import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
-import { FormItemInput } from '../form/FormItem'
+import { FormItemInput } from '../../form/FormItem'
 import { validateResetPassword } from '@/validations/Auth'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { Lock } from 'lucide-react'
-import Container from '../layout/Container'
-import InvalideTokenResetPassword from './InvalideTokenResetPassword'
+import Container from '@/components/layout/Container'
+import InvalideTokenResetPassword from '@/components/auth/forget-password/InvalideTokenResetPassword'
+import CardInfo from '@/components/layout/CardInfo'
 
 
 export default function FormForgerPassword({ code }: { code: string  }) {
@@ -50,7 +51,7 @@ export default function FormForgerPassword({ code }: { code: string  }) {
         const { password } = values
 
         const { error } = await supabase.auth.updateUser({ password })
-
+        console.log(error)
         if (error) return toast.error('Error al cambiar la contraseña')
 
         toast.success('Contraseña cambiada correctamente')
@@ -58,7 +59,7 @@ export default function FormForgerPassword({ code }: { code: string  }) {
         router.replace('/')
     }
 
-    if (!modeRecovery) return <InvalideTokenResetPassword />
+    if (!modeRecovery) return <CardInfo icon={Lock} variant='error' title='Token invalido' description='Manda nuevamente un correo para restablecer tu contraseña' buttonHref='/auth/forget-password' variantButton='outline' buttonText='Restablecer contraseña' />
 
     return (
         <Container className="max-w-xs">

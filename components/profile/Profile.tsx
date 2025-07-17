@@ -8,7 +8,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown, Settings, User } from "lucide-react"
-import LogOut from "./dashboard/LogOut"
+import LogOut from "../dashboard/LogOut"
 import { createClient } from "@/utils/supabase/server"
 
 interface Props{
