@@ -1,11 +1,21 @@
 import FormCreateEvent from '@/components/events/FormCreateEvent'
+import CardInfo from '@/components/layout/CardInfo'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-export default function page() {
+import { Check } from 'lucide-react'
+import menuEdit from '@/assets/img/menu-edit.webp'
+import CreatedEventSuccess from '@/components/events/createEvent/CreatedEventSuccess'
+export default async function page({params, searchParams}:{params: any, searchParams: Promise<{status: string}>}) {
 
+    const status = (await searchParams)?.status
+    
 
     return (
         <div className='max-w-xl mx-auto'>
-            <Card>
+            {status === 'success' && <div className='h-[calc(100vh-100px)] flex justify-center items-center'>
+                <CreatedEventSuccess />   
+            </div>}
+
+           {status === undefined && <Card>
                 <CardHeader>
                     <h2 className='text-xl font-semibold'>Crear nuevo evento</h2>
                     <p className='text-sm text-gray-400'>Crea un nuevo evento para que puedas organizar tus reuniones y eventos.</p>
@@ -13,7 +23,7 @@ export default function page() {
                 <CardContent>
                     <FormCreateEvent />
                 </CardContent>
-            </Card>
+            </Card> }
         </div>
     )
 }

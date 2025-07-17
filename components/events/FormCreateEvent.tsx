@@ -53,8 +53,7 @@ export default function FormCreateEvent() {
             return
         }
 
-        toast.success(response.message)
-        router.push('/dashboard/events')
+        router.push('/dashboard/create-event?status=success')
       
     }
 
