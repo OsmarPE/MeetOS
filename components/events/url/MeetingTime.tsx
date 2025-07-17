@@ -1,8 +1,8 @@
 'use client'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import { cn, genetareRangeTime } from '@/lib/utils'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-export default function EventTime({range = 30}: {range?: number}) {
+export default function MeetingTime({duration = 30}: {duration?: number}) {
 
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -17,7 +17,7 @@ export default function EventTime({range = 30}: {range?: number}) {
 
   const timeSelected = searchParams.get('time') ?? ''
 
-  const times = genetareRangeTime(range)
+  const times = genetareRangeTime(duration)
 
   return (
     <section className='h-full overflow-y-auto px-4 mask-y-from-90%'> 

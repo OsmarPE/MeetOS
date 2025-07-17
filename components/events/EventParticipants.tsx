@@ -1,39 +1,27 @@
 'use client'
 import { Plus, Users, X } from 'lucide-react'
-import React, { useState } from 'react'
-import { Button } from '../ui/button'
-import Badge from '../layout/Badge'
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
-import { Label } from '../ui/label'
-import { Input } from '../ui/input'
+import React, { act, useState } from 'react'
 import Message from '../layout/Message'
-import { Event } from '@/validations/Events'
+import { Event, EventCreatedSchedule, validateEvent } from '@/validations/Events'
 import { actionSaveEvent } from '@/actions/events'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'sonner'
 import FormSubmit from '../auth/FormSubmit'
-
-type User = {
-    name: string,
-    email: string
-}
+import ParticipantsList from './url/ParticipantsList'
+import ParticipantModal from './url/ParticipantModal'
+import { ParticipantSchema } from '@/validations/Participant'
+import ParticipantHeader from './url/ParticipantHeader'
+import ParticipantTitle from './url/ParticipantTitle'
 
 type Props = Omit<Event, 'active'> 
 
 export default function EventParticipants({ title, description, duration, type, created_at, url }: Props) {
 
     const [loading, setLoading] = useState(false)
-    const [participants, setParticipants] = React.useState<User[]>([])
+    const [participants, setParticipants] = React.useState<ParticipantSchema[]>([])
     const searchParams = useSearchParams()
     const [open, setopen] = useState(false)
-    const [user, setUser] = useState<User>({
+    const [participant, setParticipant] = useState<ParticipantSchema>({
         name: '',
         email: '',
     })
@@ -41,11 +29,11 @@ export default function EventParticipants({ title, description, duration, type, 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (!user.name || !user.email) return
+        if (!participant.name || !participant.email) return
 
-        if (participants.find(item => item.email === user.email)) return
+        if (participants.find(item => item.email === participant.email)) return
 
-        setParticipants(prevState => [...prevState, user])
+        setParticipants(prevState => [...prevState, participant])
         setopen(false)
     }
 
@@ -53,8 +41,8 @@ export default function EventParticipants({ title, description, duration, type, 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
 
-        setUser({
-            ...user,
+        setParticipant({
+            ...participant,
             [name]: value,
         })
 
@@ -76,6 +64,26 @@ export default function EventParticipants({ title, description, duration, type, 
         const exactDate = new Date(year, month - 1, day, hours, minutes);
         const timeStart = Math.floor(exactDate.getTime() / 1000);
         const timeEnd = timeStart + (Number(duration) * 60);
+
+
+        const validation =  await EventCreatedSchedule.safeParse({
+            title,
+            description,
+            duration: duration.toString(),
+            type,
+            created_at,
+            url,
+            time_start: timeStart,
+            time_end: timeEnd,
+            date,
+            participants
+
+        })
+       
+        if (!validation.success) {
+            toast.error('Debe completar todos los campos')
+            return
+        }
         
 
         const form = new FormData()
@@ -101,67 +109,35 @@ export default function EventParticipants({ title, description, duration, type, 
 
 
     return (
-        <>
-            <article className=' border border-gray-200 rounded-lg p-8 '>
-                <div className='flex justify-between items-center gap-4'>
-                    <h3 className='font-medium text-base flex gap-2 items-center'>
-                        <Users width={16} height={16} className='text-primary' />
-                        <span>Participantes</span>
-                    </h3>
-                    <Dialog open={open} onOpenChange={setopen}>
-                        <DialogTrigger asChild>
-                            <Button variant={'outline'} size={'icon'}>
-                                <Plus width={20} height={20} />
-                            </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                            <DialogHeader>
-                                <DialogTitle className='flex gap-2 items-center'>
-                                    <Users width={18} height={18} />
-                                    Agregar participante
-                                </DialogTitle>
-                                <DialogDescription>
-                                    Añade una invitación a un participante para que pueda participar en la reunión.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <form onSubmit={handleSubmit}>
-                                <div className='space-y-4'>
-                                    <div>
-                                        <Label className='inline-block mb-1' htmlFor='name'> Nombre </Label>
-                                        <Input onChange={handleChange} type='text' id='name' name='name' placeholder='Ej. Mario Castillo' className='w-full' />
-                                    </div>
-                                    <div>
-                                        <Label className='inline-block mb-1' htmlFor='email'> Correo electronico</Label>
-                                        <Input onChange={handleChange} type='email' id='email' name='email' placeholder='exemple@gmail.com' className='w-full' />
-                                    </div>
-                                </div>
-                                <div className='flex justify-end gap-4 mt-8'>
-                                    <Button type='button' variant={'outline'} className='' onClick={() => setopen(false)}>Cancelar</Button>
-                                    <Button className=''>Agregar</Button>
-                                </div>
-                            </form>
-                        </DialogContent>
-                    </Dialog>
-                </div>
-                <div className='flex flex-wrap gap-4 mt-4'>
-                    {
-                        participants.length > 0 ?
-                            participants.map((participant, index) => (
-                                <Badge key={index} variant='outline' size='sm' className='relative'>
-                                    {participant.name}
-                                    <button onClick={() => handleRemove(index)} className='text-gray-400 cursor-pointer hover:text-primary rounded-full w-4 h-4 grid place-content-center shadow bg-white absolute top-0 right-0 -translate-y-1/2 translate-x-1/3'>
-                                        <X width={10} height={10} />
-                                    </button>
-                                </Badge>
-                            )) :
-                            <Message>No hay participantes registrados</Message>
-                    }
-                </div>
-            </article>
-            <FormSubmit loading={loading} onClick={() => handleSubmitSave()} className='mt-4 ml-auto flex'>
-                <Plus width={20} height={20} />
-                <span>Crear Reunion</span>
-            </FormSubmit>
-        </>
-    )
+      <>
+        <article className=" border border-gray-200 rounded-lg p-8 ">
+          <ParticipantHeader>
+            <ParticipantTitle />
+            <ParticipantModal
+              open={open}
+              setopen={setopen}
+              handleSubmit={handleSubmit}
+              handleChange={handleChange}
+            />
+          </ParticipantHeader>
+          {participants.length > 0 ? (
+            <ParticipantsList
+              className="mt-4"
+              participants={participants}
+              handleRemove={handleRemove}
+            />
+          ) : (
+            <Message className="mt-4">No hay participantes registrados</Message>
+          )}
+        </article>
+        <FormSubmit
+          loading={loading}
+          onClick={() => handleSubmitSave()}
+          className="mt-4 ml-auto flex"
+        >
+          <Plus width={20} height={20} />
+          <span>Crear Reunion</span>
+        </FormSubmit>
+      </>
+    );
 }

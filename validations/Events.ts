@@ -15,5 +15,15 @@ export const eventExtended = validateEvent.extend({
     event_id: z.string(),
 });
 
+export const EventCreatedSchedule = validateEvent.extend({
+    time_start: z.number(),
+    time_end: z.number(),
+    date: z.string(),
+    created_at: z.string(),
+    participants: z.array(z.object({
+        name: z.string(),
+        email: z.string().email(),
+    })).min(1),
+})
 
 export type Event = z.infer<typeof eventExtended>

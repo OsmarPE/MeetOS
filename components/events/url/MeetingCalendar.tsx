@@ -1,12 +1,11 @@
 'use client'
 import React from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import Calendar from '../calendar/Calendar'
+import Calendar from '../../calendar/Calendar'
 import { CalendarDate, getLocalTimeZone, parseDate, today } from '@internationalized/date'
 import { getDateOfISOString } from '@/lib/utils'
-import { Availibility } from '@/validations/Availibility'
 
-export default function EventCalendar() {
+export default function MeetingCalendar() {
 
     const router = useRouter()
     const search = useSearchParams()
