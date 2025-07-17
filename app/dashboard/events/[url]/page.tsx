@@ -2,12 +2,10 @@ import EventCalendar from '@/components/events/EventCalendar';
 import EventDetails from '@/components/events/EventDetails';
 import EventParticipants from '@/components/events/EventParticipants';
 import EventTime from '@/components/events/EventTime';
-import Badge from '@/components/layout/Badge';
 import Message from '@/components/layout/Message';
-import { Button } from '@/components/ui/button';
 import { createClient } from '@/utils/supabase/server';
 import { Availibility } from '@/validations/Availibility';
-import { AlertCircle, Calendar, Clock3, Plus, User, Users, Video } from 'lucide-react';
+import { Event } from '@/validations/Events';
 import React from 'react'
 
 
@@ -18,19 +16,19 @@ export default async function page({ params, searchParams }: { params: Promise<{
   
   const supabase = await createClient()
   const { data: auth } = await supabase.auth.getUser() as any
-  const { data } = await supabase.from('event').select('*').eq('url', slug).single()
+  const { data } = await supabase.from('event').select('id,title, description, duration, type, created_at, url, active, event_id').eq('url', slug).single() as { data: Event }
   const { data: availibilities } = await supabase.from('availibility').select('*').eq('id_profile', auth.user.id)
 
 
   if(!data) return <Message>No se encontró la reunión</Message>
 
-  const { title, description, duration, type, created_at, url } = data
+  const { id, title, description, duration, type, created_at, url, event_id } = data
 
 
   return (
     <div className='mt-4 space-y-4 w-[90%] mx-auto max-w-5xl'>
-      <article className=' border border-gray-200 rounded-lg p-8 grid gap-4 lg:grid-cols-[2fr_5fr] '>
-        <EventDetails 
+      <article className=' border border-gray-200 rounded-lg p-6 sm:p-8 grid gap-4 lg:grid-cols-[2fr_5fr] '>
+        <EventDetails
           title={title} 
           description={description} 
           duration={duration} 
@@ -38,13 +36,15 @@ export default async function page({ params, searchParams }: { params: Promise<{
           created_at={created_at}
           url={url}
           date={date}
+          event_id={event_id}
+          id={id}
         />
-        <div className='grid gap-4 grid-cols-[3fr_2fr] lg:grid-cols-2'>
+        <div className='grid gap-4 sm:grid-cols-[3fr_2fr] lg:grid-cols-2'>
           <section>
             <EventCalendar availibilities={availibilities as Availibility[]} />
           </section>
           <section>
-            <EventTime range={duration}/>
+            <EventTime range={+duration}/>
           </section>
         </div>
       </article>
@@ -55,6 +55,8 @@ export default async function page({ params, searchParams }: { params: Promise<{
         type={type} 
         created_at={created_at}
         url={url}
+        event_id={event_id}
+        id={id}
       />
     </div>
 

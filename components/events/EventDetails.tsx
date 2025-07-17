@@ -18,7 +18,7 @@ export default function EventDetails({  title, description, duration, type, crea
   return (
       <section className=''>
           <Calendar width={28} height={28} className='text-primary mb-6'/>
-          <div className='flex justify-between lg:flex-col gap-4'>
+          <div className='flex justify-between flex-col sm:flex-row lg:flex-col gap-4'>
             <header>
               <p className='text-gray-500 text-sm'>{title}</p>
               <h3 className='font-medium text-xl leading-normal'>{title}</h3>
