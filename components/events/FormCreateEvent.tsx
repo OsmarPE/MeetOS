@@ -1,11 +1,6 @@
 'use client'
-import { useActionState } from 'react'
-import { Label } from '../ui/label'
-import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import Link from 'next/link'
-import { actionSignIn } from '@/actions/auth'
-import Google from '@/assets/img/Google'
 import {
   Form
 } from "@/components/ui/form"
@@ -18,7 +13,6 @@ import { validateEvent } from '@/validations/Events'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import FormSubmit from '../auth/FormSubmit'
-import { meetTypes } from '@/lib/utils'
 import SelectTypeEvent from './SelectTypeEvent'
 import { actionCreateEvent } from '@/actions/events'
 
