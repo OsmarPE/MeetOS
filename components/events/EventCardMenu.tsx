@@ -53,7 +53,7 @@ export default function EventCardMenu({url, id, grantId, grandEmail, eventId}: P
                     <Link width={20} height={20} />
                     Calendario
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem disabled={!eventId}>
                   <Pencil width={20} height={20} />
                   Editar
                 </DropdownMenuItem>
