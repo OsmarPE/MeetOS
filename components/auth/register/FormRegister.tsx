@@ -1,10 +1,8 @@
 'use client'
-import { useActionState, useState } from 'react'
-import { Label } from '../../ui/label'
-import { Input } from '../../ui/input'
+import { useState } from 'react'
 import { Button } from '../../ui/button'
 import Link from 'next/link'
-import { actionSignIn, actionSignUp } from '@/actions/auth'
+import { actionSignUp } from '@/actions/auth'
 import Google from '@/assets/img/Google'
 import FormSubmit from '../FormSubmit'
 import {

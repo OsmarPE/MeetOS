@@ -1,12 +1,7 @@
-import { actionUpdateProfile } from '@/actions/profile'
-import FormSubmit from '@/components/auth/FormSubmit'
-import ProfileAccounts from '@/components/profile/ProfileAccounts'
 import ProfileBody from '@/components/profile/ProfileBody'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { createClient } from '@/utils/supabase/server'
-import { UploadCloud, Video } from 'lucide-react'
+import { Video } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 

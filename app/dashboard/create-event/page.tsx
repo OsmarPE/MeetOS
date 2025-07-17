@@ -1,5 +1,4 @@
 import FormCreateEvent from '@/components/events/FormCreateEvent'
-import CardInfo from '@/components/layout/CardInfo'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import CreatedEventSuccess from '@/components/events/createEvent/CreatedEventSuccess'
 export default async function page({params, searchParams}:{params: any, searchParams: Promise<{status: string}>}) {

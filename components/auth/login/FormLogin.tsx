@@ -1,7 +1,4 @@
 'use client'
-import { useActionState } from 'react'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { actionSignIn } from '@/actions/auth'
@@ -17,12 +14,10 @@ import z from 'zod'
 import { FormItemInput } from '@/components/form/FormItem'
 import { validateSignIn } from '@/validations/Auth'
 import { toast } from 'sonner'
-import { useRouter } from 'next/navigation'
 
 
 export default function FormLogin() {
     
-    const router = useRouter()
     
     const form = useForm<z.infer<typeof validateSignIn>>({
     resolver: zodResolver(validateSignIn),

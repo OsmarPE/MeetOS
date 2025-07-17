@@ -3,12 +3,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "../ui/button"
-import { Calendar, EllipsisVertical, Link, Pencil, Trash } from "lucide-react"
+import { EllipsisVertical, Link, Pencil, Trash } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 

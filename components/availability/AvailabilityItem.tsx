@@ -4,7 +4,6 @@ import { Switch } from '@/components/ui/switch'
 import { daysTranslete, times } from '@/lib/utils'
 import { Availibility } from '@/validations/Availibility'
 import { ChevronRight } from 'lucide-react'
-import { FormEvent } from 'react'
 
 interface Props {
   availibility: Availibility

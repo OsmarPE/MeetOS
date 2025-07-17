@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { formedDate, formedTime } from "@/lib/utils";
-import { Calendar, Clock1, Trash, Users, Video } from "lucide-react";
+import { Calendar, Clock1, Trash, Video } from "lucide-react";
 import Link from "next/link";
 import { Event } from "nylas";
-import { Separator } from "../ui/separator";
 import MeetCardShowParticipanButton from "./MeetCardShowParticipanButton";
 
 type Props ={

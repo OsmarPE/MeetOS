@@ -1,13 +1,7 @@
-
-import EventCard from '@/components/events/EventCard'
 import EventHeader from '@/components/events/EventHeader'
 import EventList from '@/components/events/EventList'
 import EventPlaceholderNewEvent from '@/components/events/EventPlaceholderNewEvent'
-import { Button } from '@/components/ui/button'
-import { nylas } from '@/lib/nylas'
 import { createClient } from '@/utils/supabase/server'
-import { CircleOff, Plus } from 'lucide-react'
-import Link from 'next/link'
 import React from 'react'
 
 export default async function page() {

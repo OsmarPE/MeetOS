@@ -1,4 +1,4 @@
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Switch } from '@/components/ui/switch'
 import { Calendar } from 'lucide-react'
 import EventCardMenu from './EventCardMenu'

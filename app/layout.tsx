@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Outfit } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import Notification from "@/components/layout/Notification";
 
 const outfit = Outfit({
   style: "normal",
-});
-
-const instrumentSans = Instrument_Sans({
-  style: "normal",
-  subsets: ["latin"],
 });
 
 

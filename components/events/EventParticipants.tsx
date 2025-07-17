@@ -1,6 +1,6 @@
 'use client'
 import { Plus, Users, X } from 'lucide-react'
-import React, { MouseEvent, useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '../ui/button'
 import Badge from '../layout/Badge'
 import {

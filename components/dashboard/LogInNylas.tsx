@@ -5,7 +5,6 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/dialog"
 import { Calendar } from "lucide-react"
 import { Button } from "../ui/button"

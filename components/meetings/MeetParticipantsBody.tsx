@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
-import { UserRound, Users, UsersRound } from "lucide-react"
+import { UsersRound } from "lucide-react"
 import MeetParticipantStatus from "./MeetParticipantStatus"
 import useParticipants from "@/hooks/use-participant"
 
