@@ -22,8 +22,8 @@ export default function MeetParticipantsBody() {
                 
                     <ul className="space-y-4 mt-2">
                         {
-                            participants.map((participant: any) => (
-                                <li key={participant.id} className="flex items-center justify-between gap-3 text-sm">  
+                            participants.map((participant: any,index) => (
+                                <li key={index} className="flex items-center justify-between gap-3 text-sm">  
                                     <div className="">
                                         <span className="font-medium">{participant.name}</span>
                                         <p className="text-gray-500">{participant.email}</p>

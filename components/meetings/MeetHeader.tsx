@@ -13,7 +13,7 @@ export default function MeetHeader() {
         </p>
       </div>
       <Button size={"lg"} asChild>
-        <Link href={`/dashboard/events/create-event`}>
+        <Link href={`/dashboard/create-event`}>
           <Plus width={20} height={20} />
           <span>Añadir reunión</span>
         </Link>

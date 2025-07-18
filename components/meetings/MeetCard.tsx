@@ -5,6 +5,7 @@ import { Calendar, Clock1, Trash, Video } from "lucide-react";
 import Link from "next/link";
 import { Event } from "nylas";
 import MeetCardShowParticipanButton from "./MeetCardShowParticipanButton";
+import MeetButtonDelete from "./MeetButtonDelete";
 
 type EventWithDetails = Pick<Event, 'title' | 'description' | 'when' | 'conferencing' | 'participants' | 'id'> & {
     when:{
@@ -51,11 +52,7 @@ export default function MeetCard({ grantId, grandEmail, title, description, when
               <MeetCardShowParticipanButton participants={participants} />
             </div>
           </div>
-          <Button variant={'outline'} size={'icon'} asChild>
-            <Link href={`/dashboard/meetings/delete?eventId=${id}&grantId=${grantId}&grandEmail=${grandEmail}`}>
-              <Trash width={20} height={20} />
-            </Link>
-          </Button>
+          <MeetButtonDelete id={id} grantId={grantId} grandEmail={grandEmail} />
         </div>
       </CardContent>
       <CardFooter>

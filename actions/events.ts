@@ -98,7 +98,11 @@ export async function actionSaveEvent(state: any, formData: FormData):Promise<{m
         }
     });
     
-    console.log(newEvent);
+    
+    const updateEvent = await supabase.from('event').update({
+        event_id: newEvent.data.id
+    }).eq('url', data.url)
+
     
     return {
         message: 'Evento creado correctamente',
