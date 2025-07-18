@@ -35,7 +35,7 @@ export default async function page() {
           grandEmail={grandEmail}
         />
       ) : (
-        <Message>No hay reuniones programadas</Message>
+        <Message className="mt-4">No hay reuniones programadas</Message>
       )}
       <MeetParticipants />
     </ParticipantsProvider>

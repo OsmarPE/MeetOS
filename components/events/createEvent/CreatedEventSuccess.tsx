@@ -28,7 +28,7 @@ export default function CreatedEventSuccess() {
         Tu evento ha sido creado correctamente
       </h2>
       <p className='text-gray-600 text-sm mb-6 leading-relaxed'>
-       Ve a <span className="text-primary">Eventos</span> y haz clic en el menu creado y haz click sobre en <span className="text-primary">Calendario</span> para programar tu evento 
+       Ve a <span className="text-primary">Eventos</span> y haz clic en el menu del evento creado y haz click sobre en <span className="text-primary">Calendario</span> para programar tu evento 
       </p>
       
       <img src={MenuEdit.src} alt="menu del evento" className="block mx-auto max-w-44 mb-8" />
