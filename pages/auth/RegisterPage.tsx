@@ -1,10 +1,8 @@
 'use client'
 import { useState } from 'react'
-import { Button } from '../../ui/button'
 import Link from 'next/link'
 import { actionSignUp } from '@/actions/auth'
 import Google from '@/assets/img/Google'
-import FormSubmit from '../FormSubmit'
 import {
   Form
 } from "@/components/ui/form"
@@ -12,17 +10,20 @@ import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
-import { FormItemInput } from '../../form/FormItem'
+
 import { validateSignUp } from '@/validations/Auth'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
-import CardInfo from '../../layout/CardInfo'
 import { Mail } from 'lucide-react'
-import FormRegisterHeader from './FormRegisterHeader'
 import Container from '@/components/layout/Container'
+import { Button } from '@/components/ui/button'
+import { FormItemInput } from '@/components/form/FormItem'
+import FormSubmit from '@/components/auth/FormSubmit'
+import CardInfo from '@/components/layout/CardInfo'
+import FormRegisterHeader from '@/components/auth/register/FormRegisterHeader'
 
 
-export default function FormRegister() {
+export default function RegisterPage() {
     
     const router = useRouter()
     const [sendEmail, setsendEmail] = useState(false)
@@ -54,7 +55,7 @@ export default function FormRegister() {
     }
 
     if(sendEmail) return (
-        <CardInfo 
+        <CardInfo
             className='mx-auto' 
             icon={Mail} 
             variant='success'

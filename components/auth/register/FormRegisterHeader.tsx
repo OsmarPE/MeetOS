@@ -1,7 +1,7 @@
 import { Calendar } from 'lucide-react'
 import React from 'react'
 
-export default function RegisterHeader() {
+export default function FormRegisterHeader() {
     return (
         <>
             <div className="size-11 bg-primary rounded-full mx-auto text-white flex items-center justify-center">
