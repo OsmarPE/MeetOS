@@ -1,11 +1,11 @@
 'use client'
-import FormSubmit from '../FormSubmit'
+import FormSubmit from '@/components/auth/FormSubmit'
 import { Form } from "@/components/ui/form"
 import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
-import { FormItemInput } from '../../form/FormItem'
+import { FormItemInput } from '@/components/form/FormItem'
 import { validateResetPassword } from '@/validations/Auth'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
@@ -16,7 +16,7 @@ import Container from '@/components/layout/Container'
 import CardInfo from '@/components/layout/CardInfo'
 
 
-export default function FormForgerPassword({ code }: { code: string  }) {
+export default function ResetPasswordPage({ code }: { code: string  }) {
 
     const [modeRecovery, setModeRecovery] = useState(false)
 
