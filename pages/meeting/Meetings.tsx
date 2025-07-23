@@ -8,7 +8,7 @@ import { ParticipantsProvider } from "@/context/ParticipantsContext";
 import { nylas } from "@/lib/nylas";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function Meetings() {
+export default async function MeetingsPage() {
   const supabase = await createClient();
   const { data: auth } = (await supabase.auth.getUser()) as any;
   const { data: profile } = await supabase

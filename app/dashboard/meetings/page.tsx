@@ -1,5 +1,4 @@
-import Meetings from "@/pages/meeting/Meetings";
-
+import MeetingsPage from "@/pages/meeting/Meetings";
 export default async function page() {
-  return <Meetings />;
+  return <MeetingsPage />;
 }
