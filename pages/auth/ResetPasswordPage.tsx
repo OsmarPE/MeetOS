@@ -46,7 +46,7 @@ export default function ResetPasswordPage({ code }: { code: string  }) {
         const { password } = values
 
         const { error } = await supabase.auth.updateUser({ password })
-        console.log(error)
+        
         if (error) return toast.error('Error al cambiar la contraseña')
 
         toast.success('Contraseña cambiada correctamente')

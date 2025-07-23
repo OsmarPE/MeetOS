@@ -22,10 +22,9 @@ export async function DELETE(request: Request,{ params }: { params: Promise<{id:
           },
         })
     
-        console.log(dataNylas);
+        
         
     } catch (error) {
-        console.log(error);
         
     }
     

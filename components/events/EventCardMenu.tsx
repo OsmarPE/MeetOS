@@ -31,7 +31,7 @@ export default function EventCardMenu({url, id, grantId, grandEmail, eventId}: P
             })
         })
 
-        console.log(response);
+      
         
 
         if (response.ok) {

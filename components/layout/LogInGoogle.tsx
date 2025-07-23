@@ -14,7 +14,7 @@ export default function LogInGoogle() {
     const getData = async () => {
         const supabase = createClient()
         const { data } = await supabase.from('profiles').select('*')
-        console.log(data);
+        
         
     }
 

@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
         }).eq('id', auth.user.id)
         
     } catch (error) {
-        console.log(error);
+        
     }
 
     // redirect the user to an error page with some instructions

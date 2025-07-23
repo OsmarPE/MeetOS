@@ -13,7 +13,7 @@ export async function GET(request: Request) {
       redirectUri: nylasConfig.callbackUri, // URI you registered with Nylas in the previous step
       code,
     });
-    console.log(data);
+    
     
     const { grantId, email } = data;
 
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
     // you probably want to use res.redirect('/some-successful-frontend-url')
 
   } catch (error) {
-    console.log(error);
+    
     
     return Response.json({
       error: 'code invalido'

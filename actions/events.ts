@@ -109,7 +109,6 @@ export async function actionSaveEvent(state: any, formData: FormData):Promise<{m
         status: 200,
     }
     } catch (error) {
-        console.log(error);
         
         return {
             message: 'No se pudo crear el evento, intenta nuevamente',
